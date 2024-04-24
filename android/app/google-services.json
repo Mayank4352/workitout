@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "502842623718",
+    "firebase_url": "https://work-it-out-efcbc-default-rtdb.firebaseio.com",
+    "project_id": "work-it-out-efcbc",
+    "storage_bucket": "work-it-out-efcbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502842623718:android:1ff205579dc59838349d27",
+        "android_client_info": {
+          "package_name": "com.codeforany.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502842623718-kcmdtudumc0hvo6ej8kflkbmtb0std30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKo6J8aqSOKbvpXG_Ui6-pj8AyJjYnnOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502842623718-kcmdtudumc0hvo6ej8kflkbmtb0std30.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "502842623718-ibei4gk3o7931281qhailicp3midfp4l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codeforany.fitness"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
