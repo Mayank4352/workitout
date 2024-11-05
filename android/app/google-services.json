@@ -3,17 +3,25 @@
     "project_number": "502842623718",
     "firebase_url": "https://work-it-out-efcbc-default-rtdb.firebaseio.com",
     "project_id": "work-it-out-efcbc",
-    "storage_bucket": "work-it-out-efcbc.appspot.com"
+    "storage_bucket": "work-it-out-efcbc.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:502842623718:android:1ff205579dc59838349d27",
+        "mobilesdk_app_id": "1:502842623718:android:c77e542e9fb486ad349d27",
         "android_client_info": {
-          "package_name": "com.codeforany.fitness"
+          "package_name": "com.mayank.workout"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "502842623718-evlikl5ujiai9ol94vfuhtrqoedpougq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mayank.workout",
+            "certificate_hash": "376b05f6ebfd3668e52e32737256e0207abe7ed0"
+          }
+        },
         {
           "client_id": "502842623718-kcmdtudumc0hvo6ej8kflkbmtb0std30.apps.googleusercontent.com",
           "client_type": 3

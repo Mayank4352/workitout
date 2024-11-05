@@ -13,10 +13,9 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
-
   @override
   Widget build(BuildContext context) {
-    User user = FirebaseAuth.instance.currentUser!;
+    User? user = FirebaseAuth.instance.currentUser;
     var media = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: TColor.white,
@@ -28,10 +27,10 @@ class _WelcomeViewState extends State<WelcomeView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-SizedBox(
+              SizedBox(
                 height: media.width * 0.1,
               ),
-               Image.asset(
+              Image.asset(
                 "assets/img/welcome.png",
                 width: media.width * 0.75,
                 fit: BoxFit.fitWidth,
@@ -40,7 +39,7 @@ SizedBox(
                 height: media.width * 0.1,
               ),
               Text(
-                "Welcome, ${user.displayName}",
+                "Welcome, ${user?.displayName}",
                 style: TextStyle(
                     color: TColor.black,
                     fontSize: 20,
@@ -51,9 +50,8 @@ SizedBox(
                 textAlign: TextAlign.center,
                 style: TextStyle(color: TColor.gray, fontSize: 12),
               ),
-             const Spacer(),
-
-               RoundButton(
+              const Spacer(),
+              RoundButton(
                   title: "Go To Home",
                   onPressed: () {
                     Navigator.pushReplacement(
@@ -61,11 +59,9 @@ SizedBox(
                         MaterialPageRoute(
                             builder: (context) => const MainTabView()));
                   }),
-               
             ],
           ),
         ),
-
       ),
     );
   }

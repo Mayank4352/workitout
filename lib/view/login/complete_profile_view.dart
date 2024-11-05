@@ -20,7 +20,7 @@ class CompleteProfileView extends StatefulWidget {
 
 class _CompleteProfileViewState extends State<CompleteProfileView> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  User user = FirebaseAuth.instance.currentUser!;
+  User? user = FirebaseAuth.instance.currentUser;
   TextEditingController txtDate = TextEditingController();
   TextEditingController txtWeight = TextEditingController();
   TextEditingController txtHeight = TextEditingController();
@@ -46,7 +46,7 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                   height: media.width * 0.05,
                 ),
                 Text(
-                  "Let’s complete your profile",
+                  "Let's complete your profile",
                   style: TextStyle(
                       color: TColor.black,
                       fontSize: 20,
@@ -64,56 +64,60 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                   child: Column(
                     children: [
                       Container(
-                          decoration: BoxDecoration(
-                              color: TColor.lightGray,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Row(
-                            children: [
-                              Container(
-                                  alignment: Alignment.center,
-                                  width: 50,
-                                  height: 50,
-                                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                                  
-                                  child: Image.asset(
-                                    "assets/img/gender.png",
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                    color: TColor.gray,
-                                  )),
-                            
-                              Expanded(
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    items: ["Male", "Female"]
-                                        .map((name) => DropdownMenuItem(
-                                              value: name,
-                                              child: Text(
-                                                name,
-                                                style: TextStyle(
-                                                    color: TColor.gray,
-                                                    fontSize: 14),
-                                              ),
-                                            ))
-                                        .toList(),
-                                    onChanged: (value) {gender = value.toString(); setState(() { });},
-                                    isExpanded: true,
-                                    hint: Text(
-                                      gender,
-                                      style: TextStyle(
-                                          color: gender == "Choose Gender" ?TColor.gray
-                                          :TColor.black,
-                                           fontSize: 12),
-                                    ),
+                        decoration: BoxDecoration(
+                            color: TColor.lightGray,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Row(
+                          children: [
+                            Container(
+                                alignment: Alignment.center,
+                                width: 50,
+                                height: 50,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Image.asset(
+                                  "assets/img/gender.png",
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                  color: TColor.gray,
+                                )),
+                            Expanded(
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  items: ["Male", "Female"]
+                                      .map((name) => DropdownMenuItem(
+                                            value: name,
+                                            child: Text(
+                                              name,
+                                              style: TextStyle(
+                                                  color: TColor.gray,
+                                                  fontSize: 14),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    gender = value.toString();
+                                    setState(() {});
+                                  },
+                                  isExpanded: true,
+                                  hint: Text(
+                                    gender,
+                                    style: TextStyle(
+                                        color: gender == "Choose Gender"
+                                            ? TColor.gray
+                                            : TColor.black,
+                                        fontSize: 12),
                                   ),
                                 ),
                               ),
-
-                             const SizedBox(width: 8,)
-
-                            ],
-                          ),),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            )
+                          ],
+                        ),
+                      ),
                       SizedBox(
                         height: media.width * 0.04,
                       ),
@@ -195,33 +199,38 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                       ),
                       RoundButton(
                           title: "Next >",
-                          onPressed: () async{
-                            if(gender == "Choose Gender" || txtDate.text == "" || txtWeight.text == "" || txtHeight.text == ""){
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all fields!")));
+                          onPressed: () async {
+                            if (gender == "Choose Gender" ||
+                                txtDate.text == "" ||
+                                txtWeight.text == "" ||
+                                txtHeight.text == "") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text("Please fill all fields!")));
                               return;
                             }
-                            try{
-                            var data = {
-                              "uid": user.uid,
-                              "email": user.email,
-                              "name": user.displayName,
-                              "photoURL": user.photoURL,
-                              "gender":gender,
-                              "dateOfBirth": txtDate.text,
-                              "weight": txtWeight.text,
-                              "height": txtHeight.text,
-                            };
-                            await users.doc(user.uid).set(data);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const WhatYourGoalView()));
+                            try {
+                              var data = {
+                                "uid": user?.uid,
+                                "email": user?.email,
+                                "name": user?.displayName,
+                                "photoURL": user?.photoURL,
+                                "gender": gender,
+                                "dateOfBirth": txtDate.text,
+                                "weight": txtWeight.text,
+                                "height": txtHeight.text,
+                              };
+                              await users.doc(user?.uid).set(data);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const WhatYourGoalView()));
                             } on Exception catch (_) {
-                                log(_.toString());
-                              }
+                              log(_.toString());
+                            }
                           }),
-                          
                     ],
                   ),
                 ),
