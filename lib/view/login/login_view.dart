@@ -31,24 +31,26 @@ class _LoginViewState extends State<LoginView> {
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on Exception catch (e) {
       // TODO
-      print('exception->$e');
+      log('exception->$e');
     }
   }
+
   Future<dynamic> signInWithFacebook() async {
-  // Trigger the sign-in flow
-  try{
-  final LoginResult loginResult = await FacebookAuth.instance.login();
+    // Trigger the sign-in flow
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
 
-  // Create a credential from the access token
-  final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      // Create a credential from the access token
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-  // Once signed in, return the UserCredential
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      // Once signed in, return the UserCredential
+      return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    } catch (e) {
+      log(e.toString());
+    }
   }
-  catch(e){
-    log(e.toString());
-  }
-}
+
   Future<bool> signOutFromGoogle() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -59,6 +61,7 @@ class _LoginViewState extends State<LoginView> {
       return false;
     }
   }
+
   bool isCheck = false;
   @override
   Widget build(BuildContext context) {
@@ -128,7 +131,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ],
                 ),
-               const Spacer(),
+                const Spacer(),
                 RoundButton(
                     title: "Login",
                     onPressed: () {
@@ -167,19 +170,23 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () async{try{
-                      await signInWithGoogle();
-                      User user = FirebaseAuth.instance.currentUser!;
-                      log(user.displayName!);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const CompleteProfileView()));
-                      }
-                      catch (e) {
-                        print('exception->$e');
-                      }},
+                      onTap: () async {
+                        try {
+                          User? user;
+                          await signInWithGoogle().then((onValue) {
+                            user = FirebaseAuth.instance.currentUser!;
+                          });
+
+                          log(user!.displayName!);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CompleteProfileView()));
+                        } catch (e) {
+                          print('exception->$e');
+                        }
+                      },
                       child: Container(
                         width: 50,
                         height: 50,
@@ -203,20 +210,19 @@ class _LoginViewState extends State<LoginView> {
                       width: media.width * 0.04,
                     ),
                     GestureDetector(
-                      onTap: () async{
-                        try{
-                      await signInWithFacebook();
-                      User user = FirebaseAuth.instance.currentUser!;
-                      log(user.displayName!);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const CompleteProfileView()));
-                      }
-                      catch (e) {
-                        print('exception->$e');
-                      }
+                      onTap: () async {
+                        try {
+                          await signInWithFacebook();
+                          User user = FirebaseAuth.instance.currentUser!;
+                          log(user.displayName!);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CompleteProfileView()));
+                        } catch (e) {
+                          print('exception->$e');
+                        }
                       },
                       child: Container(
                         width: 50,
@@ -250,7 +256,7 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Don’t have an account yet? ",
+                        "Don't have an account yet? ",
                         style: TextStyle(
                           color: TColor.black,
                           fontSize: 14,

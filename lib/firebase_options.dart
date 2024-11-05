@@ -51,11 +51,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDKo6J8aqSOKbvpXG_Ui6-pj8AyJjYnnOA',
-    appId: '1:502842623718:android:1ff205579dc59838349d27',
+    appId: '1:502842623718:android:c77e542e9fb486ad349d27',
     messagingSenderId: '502842623718',
     projectId: 'work-it-out-efcbc',
     databaseURL: 'https://work-it-out-efcbc-default-rtdb.firebaseio.com',
-    storageBucket: 'work-it-out-efcbc.appspot.com',
+    storageBucket: 'work-it-out-efcbc.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -65,8 +65,10 @@ class DefaultFirebaseOptions {
     projectId: 'work-it-out-efcbc',
     databaseURL: 'https://work-it-out-efcbc-default-rtdb.firebaseio.com',
     storageBucket: 'work-it-out-efcbc.appspot.com',
-    iosClientId: '502842623718-ibei4gk3o7931281qhailicp3midfp4l.apps.googleusercontent.com',
-    iosBundleId: 'com.codeforany.fitness',
+    androidClientId:
+        '502842623718-0jlgq33hnf9elh1lvjb2od7oongl074f.apps.googleusercontent.com',
+    iosClientId:
+        '502842623718-ibei4gk3o7931281qhailicp3midfp4l.apps.googleusercontent.com',
+    iosBundleId: 'com.mayank.workout',
   );
-
 }

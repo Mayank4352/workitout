@@ -88,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    User user = FirebaseAuth.instance.currentUser!;
+    User? user = FirebaseAuth.instance.currentUser!;
     var media = MediaQuery.of(context).size;
 
     final lineBarsData = [
@@ -207,7 +207,9 @@ class _HomeViewState extends State<HomeView> {
                                       type: RoundButtonType.bgSGradient,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
-                                      onPressed: () {print("Button Pressed");}))
+                                      onPressed: () {
+                                        print("Button Pressed");
+                                      }))
                             ],
                           ),
                           AspectRatio(
@@ -254,8 +256,8 @@ class _HomeViewState extends State<HomeView> {
                             fontWeight: FontWeight.w700),
                       ),
                       SizedBox(
-                        width: media.width*0.2,
-                        height: media.height*0.03,
+                        width: media.width * 0.2,
+                        height: media.height * 0.03,
                         child: RoundButton(
                           title: "Check",
                           type: RoundButtonType.bgGradient,

@@ -1,17 +1,14 @@
 import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/tab_button.dart';
-import 'package:fitness/view/home/blank_view.dart';
 import 'package:fitness/view/main_tab/select_view.dart';
 import 'package:flutter/material.dart';
 
 import '../home/home_view.dart';
 import '../photo_progress/photo_progress_view.dart';
 import '../profile/profile_view.dart';
-import '../workout_tracker/workout_tracker_view.dart';
 
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
@@ -22,12 +19,11 @@ class MainTabView extends StatefulWidget {
 
 class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
-  final PageStorageBucket pageBucket = PageStorageBucket(); 
+  final PageStorageBucket pageBucket = PageStorageBucket();
   Widget currentTab = const HomeView();
   @override
   Widget build(BuildContext context) {
     DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-    FirebaseStorage storage = FirebaseStorage.instance;
     return Scaffold(
       backgroundColor: TColor.white,
       body: PageStorage(bucket: pageBucket, child: currentTab),
@@ -36,7 +32,7 @@ class _MainTabViewState extends State<MainTabView> {
         width: 70,
         height: 70,
         child: InkWell(
-          onTap: () async{
+          onTap: () async {
             var text = await dbRef.child("hello").get();
             log(text.value.toString());
           },
@@ -50,10 +46,15 @@ class _MainTabViewState extends State<MainTabView> {
                 borderRadius: BorderRadius.circular(35),
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 2,)
+                    color: Colors.black12,
+                    blurRadius: 2,
+                  )
                 ]),
-            child: Icon(Icons.search,color: TColor.white, size: 35, ),
+            child: Icon(
+              Icons.search,
+              color: TColor.white,
+              size: 35,
+            ),
           ),
         ),
       ),
@@ -88,15 +89,16 @@ class _MainTabViewState extends State<MainTabView> {
                     setState(() {});
                   }
                 }),
-
-              const  SizedBox(width: 40,),
+            const SizedBox(
+              width: 40,
+            ),
             TabButton(
                 icon: "assets/img/camera_tab.png",
                 selectIcon: "assets/img/camera_tab_select.png",
                 isActive: selectTab == 2,
                 onTap: () {
                   selectTab = 2;
-                   currentTab = const PhotoProgressView();
+                  currentTab = const PhotoProgressView();
                   if (mounted) {
                     setState(() {});
                   }
@@ -107,7 +109,7 @@ class _MainTabViewState extends State<MainTabView> {
                 isActive: selectTab == 3,
                 onTap: () {
                   selectTab = 3;
-                   currentTab = ProfileView();
+                  currentTab = ProfileView();
                   if (mounted) {
                     setState(() {});
                   }
