@@ -1,4 +1,4 @@
-package com.codeforany.fitness
+package com.mayank.workout
 
 import io.flutter.embedding.android.FlutterActivity
 
