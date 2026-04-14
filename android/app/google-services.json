@@ -41,10 +41,7 @@
             },
             {
               "client_id": "502842623718-ibei4gk3o7931281qhailicp3midfp4l.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.codeforany.fitness"
-              }
+              "client_type": 2
             }
           ]
         }
